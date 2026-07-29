@@ -3,7 +3,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-aut
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyC2Kt1EiycdXjpa8HSpZwTJTOatUpvGkSPc",
+  apiKey: "AIzaSyC2KtiEycdXjpa8HSpZwTJTOatUpvGkSPc",
   authDomain: "control-entradas-prado-2026.firebaseapp.com",
   projectId: "control-entradas-prado-2026",
   storageBucket: "control-entradas-prado-2026.firebasestorage.app",
