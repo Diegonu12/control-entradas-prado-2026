@@ -1,5 +1,10 @@
 import { $, downloadText, errorMessage, escapeHtml, formatDate, hoyISO, normClient, normNumber } from "./utils.js";
-import { login, logout, observeAuth } from "./auth.js";
+import {
+  login,
+  logout,
+  observeAuth,
+  register
+} from "./auth.js";
 import { createDelivery, migrateLegacy, removeDelivery, updateDelivery, watchDeliveries } from "./entregas-service.js";
 
 const LEGACY_KEY="agroventas_rural_prado_2026_entregas";

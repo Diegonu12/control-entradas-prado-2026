@@ -1,141 +1,849 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
   <meta name="theme-color" content="#1f4c2c">
-  <meta name="description" content="Control interno de entrega de entradas para la Rural del Prado 2026.">
-  <title>Control de Entradas · Rural del Prado 2026</title>
-  <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icons/icon-192.png">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png">
-  <link rel="stylesheet" href="./css/styles.css">
+
+  <meta
+    name="description"
+    content="Control interno de entrega de entradas para la Rural del Prado 2026."
+  >
+
+  <title>
+    Control de Entradas · Rural del Prado 2026
+  </title>
+
+  <link
+    rel="manifest"
+    href="./manifest.webmanifest"
+  >
+
+  <link
+    rel="icon"
+    href="./icons/icon-192.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="./icons/icon-192.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./css/styles.css"
+  >
 </head>
+
 <body>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <section id="pantalla-login" class="login-shell">
+  <!-- MENSAJES DE LA APLICACIÓN -->
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+  <!-- PANTALLA DE INICIO DE SESIÓN -->
+  <section
+    id="pantalla-login"
+    class="login-shell"
+  >
+
     <div class="login-card">
-      <div class="brand-mark">🎟️</div>
-      <p class="eyebrow">Agroventas · Rural del Prado 2026</p>
-      <h1>Control de entradas</h1>
-      <p class="muted">Ingresá para ver y registrar entradas.</p>
 
-      <form id="form-login" class="stack" autocomplete="on">
+      <div class="brand-mark">
+        🎟️
+      </div>
+
+      <p class="eyebrow">
+        Agroventas · Rural del Prado 2026
+      </p>
+
+      <h1>
+        Control de entradas
+      </h1>
+
+      <p class="muted">
+        Ingresá para ver y registrar entradas.
+      </p>
+
+
+      <!-- FORMULARIO DE LOGIN -->
+      <form
+        id="form-login"
+        class="stack"
+        autocomplete="on"
+      >
+
         <label>
           <span>Correo</span>
-          <input id="login-email" type="email" autocomplete="username" required placeholder="vendedor@agroventas.com.uy">
+
+          <input
+            id="login-email"
+            type="email"
+            autocomplete="username"
+            required
+            placeholder="vendedor@agroventas.com.uy"
+          >
         </label>
+
+
         <label>
           <span>Contraseña</span>
-          <input id="login-password" type="password" autocomplete="current-password" required placeholder="••••••••">
+
+          <input
+            id="login-password"
+            type="password"
+            autocomplete="current-password"
+            required
+            placeholder="••••••••"
+          >
         </label>
-        <button id="btn-login" class="btn primary" type="submit">Ingresar</button>
+
+
+        <button
+          id="btn-login"
+          class="btn primary"
+          type="submit"
+        >
+          Ingresar
+        </button>
+
       </form>
-      <p class="small muted">Los datos solo son visibles para usuarios autorizados en Firebase.</p>
+
+
+      <!-- OPCIÓN PARA CREAR CUENTA -->
+      <p
+        class="small muted"
+        style="text-align: center; margin: 18px 0 10px;"
+      >
+        ¿Todavía no tenés una cuenta?
+      </p>
+
+      <button
+        id="btn-abrir-registro"
+        class="btn secondary"
+        type="button"
+        style="width: 100%;"
+      >
+        Crear cuenta de vendedor
+      </button>
+
+
+      <p
+        class="small muted"
+        style="margin-top: 18px;"
+      >
+        Los datos solo son visibles para usuarios autorizados en Firebase.
+      </p>
+
     </div>
+
   </section>
 
-  <div id="pantalla-app" hidden>
+
+  <!-- MODAL PARA CREAR CUENTA -->
+  <dialog
+    id="modal-registro"
+    class="modal"
+  >
+
+    <form
+      id="form-registro"
+      class="modal-card"
+      autocomplete="on"
+    >
+
+      <div class="card-heading">
+
+        <div>
+          <p class="eyebrow">
+            Nuevo vendedor
+          </p>
+
+          <h2>
+            Crear cuenta
+          </h2>
+        </div>
+
+
+        <button
+          type="button"
+          id="cerrar-registro"
+          class="icon-btn"
+          aria-label="Cerrar registro"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <p class="muted">
+        Creá tu usuario para registrar y consultar tus propias entregas.
+      </p>
+
+
+      <div class="stack">
+
+        <label>
+          <span>Correo del vendedor *</span>
+
+          <input
+            id="registro-email"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder="vendedor@agroventas.com.uy"
+          >
+        </label>
+
+
+        <label>
+          <span>Contraseña *</span>
+
+          <input
+            id="registro-password"
+            type="password"
+            autocomplete="new-password"
+            minlength="6"
+            required
+            placeholder="Mínimo 6 caracteres"
+          >
+        </label>
+
+
+        <label>
+          <span>Confirmar contraseña *</span>
+
+          <input
+            id="registro-password-confirm"
+            type="password"
+            autocomplete="new-password"
+            minlength="6"
+            required
+            placeholder="Repetí la contraseña"
+          >
+        </label>
+
+      </div>
+
+
+      <div class="action-row">
+
+        <button
+          id="btn-registrar"
+          class="btn primary"
+          type="submit"
+        >
+          Crear cuenta
+        </button>
+
+
+        <button
+          id="cancelar-registro"
+          class="btn secondary"
+          type="button"
+        >
+          Cancelar
+        </button>
+
+      </div>
+
+    </form>
+
+  </dialog>
+
+
+  <!-- APLICACIÓN PRINCIPAL -->
+  <div
+    id="pantalla-app"
+    hidden
+  >
+
     <header class="app-header">
+
       <div>
-        <p class="eyebrow light">Agroventas · Edición 2026</p>
-        <h1>Entrega de Entradas</h1>
+        <p class="eyebrow light">
+          Agroventas · Edición 2026
+        </p>
+
+        <h1>
+          Entrega de Entradas
+        </h1>
       </div>
+
+
       <div class="header-actions">
-        <span id="estado-conexion" class="connection"><span class="dot"></span><span class="estado-texto">En línea</span></span>
-        <button id="btn-instalar" class="btn ghost" hidden>Instalar app</button>
-        <button id="btn-salir" class="btn ghost">Salir</button>
+
+        <span
+          id="estado-conexion"
+          class="connection"
+        >
+          <span class="dot"></span>
+
+          <span class="estado-texto">
+            En línea
+          </span>
+        </span>
+
+
+        <button
+          id="btn-instalar"
+          class="btn ghost"
+          type="button"
+          hidden
+        >
+          Instalar app
+        </button>
+
+
+        <button
+          id="btn-salir"
+          class="btn ghost"
+          type="button"
+        >
+          Salir
+        </button>
+
       </div>
+
     </header>
 
+
     <main class="container">
+
+      <!-- INFORMACIÓN DEL USUARIO -->
       <section class="user-row">
-        <div><span class="muted small">Sesión iniciada como</span><strong id="usuario-email"></strong></div>
-        <button id="btn-migrar" class="btn secondary" hidden>Migrar datos anteriores</button>
+
+        <div>
+          <span class="muted small">
+            Sesión iniciada como
+          </span>
+
+          <strong id="usuario-email"></strong>
+        </div>
+
+
+        <button
+          id="btn-migrar"
+          class="btn secondary"
+          type="button"
+          hidden
+        >
+          Migrar datos anteriores
+        </button>
+
       </section>
 
-      <section class="stats-grid" aria-label="Resumen">
-        <article class="stat"><span>Total entregadas</span><strong id="stat-total">0</strong></article>
-        <article class="stat"><span>Entregadas hoy</span><strong id="stat-hoy">0</strong></article>
-        <article class="stat"><span>Entrada de un día</span><strong id="stat-dia">0</strong></article>
-        <article class="stat"><span>Pases libres</span><strong id="stat-libre">0</strong></article>
+
+      <!-- ESTADÍSTICAS -->
+      <section
+        class="stats-grid"
+        aria-label="Resumen"
+      >
+
+        <article class="stat">
+          <span>Total entregadas</span>
+          <strong id="stat-total">0</strong>
+        </article>
+
+
+        <article class="stat">
+          <span>Entregadas hoy</span>
+          <strong id="stat-hoy">0</strong>
+        </article>
+
+
+        <article class="stat">
+          <span>Entrada de un día</span>
+          <strong id="stat-dia">0</strong>
+        </article>
+
+
+        <article class="stat">
+          <span>Pases libres</span>
+          <strong id="stat-libre">0</strong>
+        </article>
+
       </section>
+
 
       <section class="grid-main">
+
+        <!-- FORMULARIO DE NUEVA ENTREGA -->
         <article class="card form-card">
+
           <div class="card-heading">
-            <div><p class="eyebrow">Nueva entrega</p><h2>Registrar entrada</h2></div>
-          </div>
-          <form id="form-entrega" class="form-grid">
-            <label class="full"><span>Nombre del cliente *</span><input id="e-cliente" type="text" autocomplete="name" required placeholder="Ej: Juan Pérez"></label>
-            <label><span>Número de entrada *</span><input id="e-numero" type="text" autocomplete="off" inputmode="text" required placeholder="Ej: 045 o A-12"></label>
-            <label><span>Tipo de entrada *</span><select id="e-tipo"><option value="Dia">Entrada de un día</option><option value="Libre">Pase libre</option></select></label>
-            <label id="campo-dia"><span>Día de acceso *</span><input id="e-dia" type="date"></label>
-            <div class="full action-row">
-              <button id="btn-entregar" class="btn primary" type="submit">Registrar entrega</button>
-              <button id="btn-escanear" class="btn secondary" type="button">Escanear código</button>
+
+            <div>
+              <p class="eyebrow">
+                Nueva entrega
+              </p>
+
+              <h2>
+                Registrar entrada
+              </h2>
             </div>
-          </form>
-        </article>
 
-        <article class="card chart-card">
-          <div class="card-heading"><div><p class="eyebrow">Actividad</p><h2>Entregas por día</h2></div></div>
-          <div id="grafico" class="chart-list"></div>
-        </article>
-      </section>
-
-      <section class="card records-card">
-        <div class="card-heading records-heading">
-          <div><p class="eyebrow">Historial</p><h2>Registro de entregas</h2></div>
-          <div class="toolbar">
-            <button id="btn-exportar-csv" class="btn secondary">Exportar CSV</button>
-            <button id="btn-exportar-json" class="btn secondary">Respaldo JSON</button>
           </div>
-        </div>
 
-        <div class="filters">
-          <input id="buscar" type="search" placeholder="Buscar cliente o número...">
-          <select id="filtro-tipo"><option value="Todos">Todos los tipos</option><option value="Dia">Entrada de un día</option><option value="Libre">Pase libre</option></select>
-          <input id="filtro-fecha" type="date" aria-label="Filtrar por fecha de entrega">
-          <button id="btn-limpiar-filtros" class="btn ghost-dark">Limpiar</button>
-        </div>
-        <p id="contador-resultados" class="small muted"></p>
 
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Cliente</th><th>N.º</th><th>Tipo</th><th>Acceso</th><th>Entrega</th><th></th></tr></thead>
-            <tbody id="tabla-entregas"></tbody>
-          </table>
-        </div>
-        <div id="vacio-lista" class="empty" hidden>No hay entregas para mostrar.</div>
+          <form
+            id="form-entrega"
+            class="form-grid"
+          >
+
+            <label class="full">
+
+              <span>
+                Nombre del cliente *
+              </span>
+
+              <input
+                id="e-cliente"
+                type="text"
+                autocomplete="name"
+                required
+                placeholder="Ej: Juan Pérez"
+              >
+
+            </label>
+
+
+            <label>
+
+              <span>
+                Número de entrada *
+              </span>
+
+              <input
+                id="e-numero"
+                type="text"
+                autocomplete="off"
+                inputmode="text"
+                required
+                placeholder="Ej: 045 o A-12"
+              >
+
+            </label>
+
+
+            <label>
+
+              <span>
+                Tipo de entrada *
+              </span>
+
+              <select id="e-tipo">
+
+                <option value="Dia">
+                  Entrada de un día
+                </option>
+
+                <option value="Libre">
+                  Pase libre
+                </option>
+
+              </select>
+
+            </label>
+
+
+            <label id="campo-dia">
+
+              <span>
+                Día de acceso *
+              </span>
+
+              <input
+                id="e-dia"
+                type="date"
+              >
+
+            </label>
+
+
+            <div class="full action-row">
+
+              <button
+                id="btn-entregar"
+                class="btn primary"
+                type="submit"
+              >
+                Registrar entrega
+              </button>
+
+
+              <button
+                id="btn-escanear"
+                class="btn secondary"
+                type="button"
+              >
+                Escanear código
+              </button>
+
+            </div>
+
+          </form>
+
+        </article>
+
+
+        <!-- GRÁFICO -->
+        <article class="card chart-card">
+
+          <div class="card-heading">
+
+            <div>
+              <p class="eyebrow">
+                Actividad
+              </p>
+
+              <h2>
+                Entregas por día
+              </h2>
+            </div>
+
+          </div>
+
+
+          <div
+            id="grafico"
+            class="chart-list"
+          ></div>
+
+        </article>
+
       </section>
+
+
+      <!-- HISTORIAL DE ENTREGAS -->
+      <section class="card records-card">
+
+        <div class="card-heading records-heading">
+
+          <div>
+            <p class="eyebrow">
+              Historial
+            </p>
+
+            <h2>
+              Registro de entregas
+            </h2>
+          </div>
+
+
+          <div class="toolbar">
+
+            <button
+              id="btn-exportar-csv"
+              class="btn secondary"
+              type="button"
+            >
+              Exportar CSV
+            </button>
+
+
+            <button
+              id="btn-exportar-json"
+              class="btn secondary"
+              type="button"
+            >
+              Respaldo JSON
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- FILTROS -->
+        <div class="filters">
+
+          <input
+            id="buscar"
+            type="search"
+            placeholder="Buscar cliente o número..."
+          >
+
+
+          <select id="filtro-tipo">
+
+            <option value="Todos">
+              Todos los tipos
+            </option>
+
+            <option value="Dia">
+              Entrada de un día
+            </option>
+
+            <option value="Libre">
+              Pase libre
+            </option>
+
+          </select>
+
+
+          <input
+            id="filtro-fecha"
+            type="date"
+            aria-label="Filtrar por fecha de entrega"
+          >
+
+
+          <button
+            id="btn-limpiar-filtros"
+            class="btn ghost-dark"
+            type="button"
+          >
+            Limpiar
+          </button>
+
+        </div>
+
+
+        <p
+          id="contador-resultados"
+          class="small muted"
+        ></p>
+
+
+        <!-- TABLA -->
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Cliente</th>
+                <th>N.º</th>
+                <th>Tipo</th>
+                <th>Acceso</th>
+                <th>Entrega</th>
+                <th></th>
+              </tr>
+
+            </thead>
+
+
+            <tbody id="tabla-entregas"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div
+          id="vacio-lista"
+          class="empty"
+          hidden
+        >
+          No hay entregas para mostrar.
+        </div>
+
+      </section>
+
     </main>
 
-    <footer>Control interno · Agroventas · Rural del Prado 2026 / dinubo.</footer>
+
+    <footer>
+      Control interno · Agroventas · Rural del Prado 2026 / dinubo.
+    </footer>
+
   </div>
 
-  <dialog id="modal-editar" class="modal">
-    <form method="dialog" class="modal-card" id="form-editar">
-      <div class="card-heading"><div><p class="eyebrow">Modificar registro</p><h2>Editar entrega</h2></div><button type="button" id="cancelar-edicion" class="icon-btn" aria-label="Cerrar">✕</button></div>
-      <div class="form-grid">
-        <label class="full"><span>Cliente *</span><input id="edit-cliente" type="text" required></label>
-        <label><span>Número *</span><input id="edit-numero" type="text" required></label>
-        <label><span>Tipo *</span><select id="edit-tipo"><option value="Dia">Entrada de un día</option><option value="Libre">Pase libre</option></select></label>
-        <label id="edit-campo-dia"><span>Día de acceso *</span><input id="edit-dia" type="date"></label>
+
+  <!-- MODAL PARA EDITAR ENTREGA -->
+  <dialog
+    id="modal-editar"
+    class="modal"
+  >
+
+    <form
+      class="modal-card"
+      id="form-editar"
+    >
+
+      <div class="card-heading">
+
+        <div>
+          <p class="eyebrow">
+            Modificar registro
+          </p>
+
+          <h2>
+            Editar entrega
+          </h2>
+        </div>
+
+
+        <button
+          type="button"
+          id="cancelar-edicion"
+          class="icon-btn"
+          aria-label="Cerrar"
+        >
+          ✕
+        </button>
+
       </div>
-      <div class="action-row"><button class="btn primary" type="submit">Guardar cambios</button><button class="btn secondary" type="button" id="cancelar-edicion-2">Cancelar</button></div>
+
+
+      <div class="form-grid">
+
+        <label class="full">
+
+          <span>Cliente *</span>
+
+          <input
+            id="edit-cliente"
+            type="text"
+            required
+          >
+
+        </label>
+
+
+        <label>
+
+          <span>Número *</span>
+
+          <input
+            id="edit-numero"
+            type="text"
+            required
+          >
+
+        </label>
+
+
+        <label>
+
+          <span>Tipo *</span>
+
+          <select id="edit-tipo">
+
+            <option value="Dia">
+              Entrada de un día
+            </option>
+
+            <option value="Libre">
+              Pase libre
+            </option>
+
+          </select>
+
+        </label>
+
+
+        <label id="edit-campo-dia">
+
+          <span>Día de acceso *</span>
+
+          <input
+            id="edit-dia"
+            type="date"
+          >
+
+        </label>
+
+      </div>
+
+
+      <div class="action-row">
+
+        <button
+          class="btn primary"
+          type="submit"
+        >
+          Guardar cambios
+        </button>
+
+
+        <button
+          class="btn secondary"
+          type="button"
+          id="cancelar-edicion-2"
+        >
+          Cancelar
+        </button>
+
+      </div>
+
     </form>
+
   </dialog>
 
-  <dialog id="modal-scanner" class="modal">
+
+  <!-- MODAL DEL ESCÁNER -->
+  <dialog
+    id="modal-scanner"
+    class="modal"
+  >
+
     <div class="modal-card scanner-card">
-      <div class="card-heading"><div><p class="eyebrow">Cámara</p><h2>Escanear entrada</h2></div><button type="button" id="cerrar-scanner" class="icon-btn">✕</button></div>
-      <video id="scanner-video" playsinline muted></video>
-      <p id="scanner-mensaje" class="muted small">Apuntá la cámara al código de barras o QR.</p>
+
+      <div class="card-heading">
+
+        <div>
+          <p class="eyebrow">
+            Cámara
+          </p>
+
+          <h2>
+            Escanear entrada
+          </h2>
+        </div>
+
+
+        <button
+          type="button"
+          id="cerrar-scanner"
+          class="icon-btn"
+          aria-label="Cerrar escáner"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <video
+        id="scanner-video"
+        playsinline
+        muted
+      ></video>
+
+
+      <p
+        id="scanner-mensaje"
+        class="muted small"
+      >
+        Apuntá la cámara al código de barras o QR.
+      </p>
+
     </div>
+
   </dialog>
 
-  <script type="module" src="./js/app.js"></script>
+
+  <!-- JAVASCRIPT PRINCIPAL -->
+  <script
+    type="module"
+    src="./js/app.js"
+  ></script>
+
 </body>
+
 </html>
