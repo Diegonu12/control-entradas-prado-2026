@@ -118,150 +118,11 @@
           Ingresar
         </button>
 
-      </form>
+</form>
 
+</div>      <!-- cierre de login-card -->
+</section>  <!-- cierre de pantalla-login -->
 
-      <!-- OPCIÓN PARA CREAR CUENTA -->
-      <p
-        class="small muted"
-        style="text-align: center; margin: 18px 0 10px;"
-      >
-        ¿Todavía no tenés una cuenta?
-      </p>
-
-      <button
-        id="btn-abrir-registro"
-        class="btn secondary"
-        type="button"
-        style="width: 100%;"
-      >
-        Crear cuenta de vendedor
-      </button>
-
-
-      <p
-        class="small muted"
-        style="margin-top: 18px;"
-      >
-        Los datos solo son visibles para usuarios autorizados en Firebase.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- MODAL PARA CREAR CUENTA -->
-  <dialog
-    id="modal-registro"
-    class="modal"
-  >
-
-    <form
-      id="form-registro"
-      class="modal-card"
-      autocomplete="on"
-    >
-
-      <div class="card-heading">
-
-        <div>
-          <p class="eyebrow">
-            Nuevo vendedor
-          </p>
-
-          <h2>
-            Crear cuenta
-          </h2>
-        </div>
-
-
-        <button
-          type="button"
-          id="cerrar-registro"
-          class="icon-btn"
-          aria-label="Cerrar registro"
-        >
-          ✕
-        </button>
-
-      </div>
-
-
-      <p class="muted">
-        Creá tu usuario para registrar y consultar tus propias entregas.
-      </p>
-
-
-      <div class="stack">
-
-        <label>
-          <span>Correo del vendedor *</span>
-
-          <input
-            id="registro-email"
-            type="email"
-            autocomplete="email"
-            required
-            placeholder="vendedor@agroventas.com.uy"
-          >
-        </label>
-
-
-        <label>
-          <span>Contraseña *</span>
-
-          <input
-            id="registro-password"
-            type="password"
-            autocomplete="new-password"
-            minlength="6"
-            required
-            placeholder="Mínimo 6 caracteres"
-          >
-        </label>
-
-
-        <label>
-          <span>Confirmar contraseña *</span>
-
-          <input
-            id="registro-password-confirm"
-            type="password"
-            autocomplete="new-password"
-            minlength="6"
-            required
-            placeholder="Repetí la contraseña"
-          >
-        </label>
-
-      </div>
-
-
-      <div class="action-row">
-
-        <button
-          id="btn-registrar"
-          class="btn primary"
-          type="submit"
-        >
-          Crear cuenta
-        </button>
-
-
-        <button
-          id="cancelar-registro"
-          class="btn secondary"
-          type="button"
-        >
-          Cancelar
-        </button>
-
-      </div>
-
-    </form>
-
-  </dialog>
 
 
   <!-- APLICACIÓN PRINCIPAL -->
@@ -471,28 +332,34 @@
               >
 
             </label>
+            <label>
+  <span>Entregado por *</span>
 
+  <input
+    id="e-vendedor"
+    type="text"
+    list="lista-entregadores"
+    autocomplete="off"
+    required
+    placeholder="Escribí o seleccioná un nombre"
+  >
+</label>
+<label
+  id="campo-entregado-por-otro"
+  class="full"
+  hidden
+  >
+<div class="full action-row center">
 
-            <div class="full action-row">
+  <button
+    id="btn-entregar"
+    class="btn primary"
+    type="submit"
+  >
+    Registrar entrega
+  </button>
 
-              <button
-                id="btn-entregar"
-                class="btn primary"
-                type="submit"
-              >
-                Registrar entrega
-              </button>
-
-
-              <button
-                id="btn-escanear"
-                class="btn secondary"
-                type="button"
-              >
-                Escanear código
-              </button>
-
-            </div>
+</div>
 
           </form>
 
@@ -626,12 +493,13 @@
             <thead>
 
               <tr>
-                <th>Cliente</th>
-                <th>N.º</th>
-                <th>Tipo</th>
-                <th>Acceso</th>
-                <th>Entrega</th>
-                <th></th>
+              <th>Cliente</th>
+              <th>N.º</th>
+              <th>Entregado por</th>
+              <th>Tipo</th>
+              <th>Acceso</th>
+              <th>Entrega</th>
+              <th></th>
               </tr>
 
             </thead>
@@ -758,6 +626,28 @@
 
         </label>
 
+       <label>
+  <span>Entregado por *</span>
+
+  <select id="edit-vendedor" required>
+  </select>
+</label>
+
+<label
+  id="edit-campo-entregado-por-otro"
+  class="full"
+  hidden
+>
+  <span>Nombre de quien entrega *</span>
+
+  <input
+    id="edit-vendedor-otro"
+    type="text"
+    autocomplete="name"
+    placeholder="Escribí el nombre"
+  >
+</label>
+
       </div>
 
 
@@ -836,7 +726,8 @@
     </div>
 
   </dialog>
-
+  
+<datalist id="lista-entregadores"></datalist>
 
   <!-- JAVASCRIPT PRINCIPAL -->
   <script
