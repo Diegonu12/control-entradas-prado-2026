@@ -242,7 +242,10 @@
       <section class="grid-main">
 
         <!-- FORMULARIO DE NUEVA ENTREGA -->
-        <article class="card form-card">
+        <article
+             id="registrar-entrega"
+             class="card form-card"
+            >
 
           <div class="card-heading">
 
@@ -625,26 +628,16 @@
           >
 
         </label>
-
-       <label>
+<label>
   <span>Entregado por *</span>
 
-  <select id="edit-vendedor" required>
-  </select>
-</label>
-
-<label
-  id="edit-campo-entregado-por-otro"
-  class="full"
-  hidden
->
-  <span>Nombre de quien entrega *</span>
-
   <input
-    id="edit-vendedor-otro"
+    id="edit-vendedor"
     type="text"
-    autocomplete="name"
-    placeholder="Escribí el nombre"
+    list="lista-entregadores"
+    autocomplete="off"
+    required
+    placeholder="Escribí o seleccioná un nombre"
   >
 </label>
 

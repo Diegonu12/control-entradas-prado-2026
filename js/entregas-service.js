@@ -103,6 +103,12 @@ function prepararEntrega(data, datosAdicionales = {}) {
         ? data.dia
         : "",
 
+    entregadoPor: String(
+      data.entregadoPor ??
+      data.vendedor ??
+      ""
+    ).trim(),
+
     usuarioUid: usuario?.uid ?? null,
 
     usuarioEmail: usuario?.email ?? null,
@@ -110,7 +116,6 @@ function prepararEntrega(data, datosAdicionales = {}) {
     ...datosAdicionales
   };
 }
-
 /**
  * Crea una entrega.
  *
@@ -311,19 +316,24 @@ export async function migrateLegacy(registros = []) {
 
   for (const registro of registros) {
     const data = {
-      cliente: registro.cliente,
-      numero: registro.numero,
+  cliente: registro.cliente,
+  numero: registro.numero,
 
-      tipo:
-        registro.tipoAcceso ||
-        registro.tipo ||
-        "Dia",
+  tipo:
+    registro.tipoAcceso ||
+    registro.tipo ||
+    "Dia",
 
-      dia:
-        registro.diaAcceso ||
-        registro.dia ||
-        hoyISO()
-    };
+  dia:
+    registro.diaAcceso ||
+    registro.dia ||
+    hoyISO(),
+
+  entregadoPor:
+    registro.entregadoPor ||
+    registro.vendedor ||
+    ""
+};
 
     try {
       await createDelivery(data);

@@ -518,55 +518,36 @@ function openEdit(id) {
   const delivery = deliveries.find(item => item.id === id);
 
   if (!delivery) {
+    toast("No se encontró la entrega.", true);
     return;
   }
 
   editingId = id;
 
-  $("edit-cliente").value = delivery.cliente;
-  $("edit-numero").value = delivery.numero;
-  $("edit-tipo").value = delivery.tipoAcceso;
-  $("edit-dia").value = delivery.diaAcceso || hoyISO();
+  $("edit-cliente").value =
+    delivery.cliente || "";
+
+  $("edit-numero").value =
+    delivery.numero || "";
+
+  $("edit-tipo").value =
+    delivery.tipoAcceso || "Dia";
+
+  $("edit-dia").value =
+    delivery.diaAcceso || hoyISO();
 
   const editDeliveryPerson =
-  getOptionalElement("edit-vendedor");
-
-const editOtherDeliveryPerson =
-  getOptionalElement("edit-vendedor-otro");
-
-const deliveryPerson =
-  delivery.entregadoPor ||
-  delivery.vendedor ||
-  "";
+    getOptionalElement("edit-vendedor");
 
   if (editDeliveryPerson) {
-    const isKnownPerson =
-      PERSONAS_ENTREGA.includes(deliveryPerson);
-
-    if (isKnownPerson) {
-      editDeliveryPerson.value = deliveryPerson;
-
-      if (editOtherDeliveryPerson) {
-        editOtherDeliveryPerson.value = "";
-      }
-    } else if (deliveryPerson) {
-      editDeliveryPerson.value = "__OTRA_PERSONA__";
-
-      if (editOtherDeliveryPerson) {
-        editOtherDeliveryPerson.value = deliveryPerson;
-      }
-    } else {
-      editDeliveryPerson.value = "";
-
-      if (editOtherDeliveryPerson) {
-        editOtherDeliveryPerson.value = "";
-      }
-    }
-
-    toggleOtherDeliveryPerson("edit-");
+    editDeliveryPerson.value =
+      delivery.entregadoPor ||
+      delivery.vendedor ||
+      "";
   }
 
   toggleDay("edit-");
+
   $("modal-editar").showModal();
 }
 
@@ -914,6 +895,13 @@ $("form-login").onsubmit = async event => {
       $("login-email").value.trim(),
       $("login-password").value
     );
+
+    toast("Usuario y contraseña correctos. Ingreso realizado.");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   } catch (error) {
     console.error(error);
     toast(errorMessage(error), true);
@@ -1076,6 +1064,17 @@ observeAuth(user => {
   $("usuario-email").textContent =
     user.email || "Usuario";
 
+toast("Ingreso correcto. Ya podés registrar entradas.");
+
+setTimeout(() => {
+  $("registrar-entrega")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+  $("e-cliente")?.focus();
+}, 150);
+
   detectLegacy();
 
   stopWatch = watchDeliveries(
@@ -1101,7 +1100,6 @@ observeAuth(user => {
     }
   );
 });
-
 
 /* =========================================================
    INICIO
